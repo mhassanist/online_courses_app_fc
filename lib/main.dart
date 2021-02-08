@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:online_courses_app/data/courses_api.dart';
 import 'package:online_courses_app/ui/list_courses.dart';
 
 void main() {
   runApp(MyApp());
+  CoursesAPI().getCourses();
 }
 
 class MyApp extends StatelessWidget {

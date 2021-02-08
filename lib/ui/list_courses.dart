@@ -16,7 +16,8 @@ class CoursesList extends StatelessWidget {
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [_buildCourseListHeader(), _buildCoursesList()],
+          children: [_buildCourseListHeader(),
+            _buildCoursesList()],
         ),
       ),
     );
