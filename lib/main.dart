@@ -9,7 +9,7 @@ void main(){
 
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider<CoursesListProvider>(create: (_) => ng pro()),
+      ChangeNotifierProvider<CoursesListProvider>(create: (_) => CoursesListProvider()),
     ],
     child: MyApp(),
   ));
