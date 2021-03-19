@@ -1,24 +1,28 @@
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
+import 'package:online_courses_app/data/course_model.dart';
+import 'package:online_courses_app/data/courses_response.dart';
 
 class CoursesAPI{
-  var baseUrl = 'https://raw.githubusercontent.com/mhassanist/courses-list-api/main';
-  getCourses()async{
-    var url = baseUrl + '/db.json';
 
-    var response = await http.get(url);
+  Future<List<Course>> getCourses()async{
+    var url = 'https://raw.githubusercontent.com/mhassanist/courses-list-api/main/db.json';
 
+    http.Response response = await http.get(url);
+    //throw "EXCEPTION ....";
+
+    CoursesResponse coursesResponse;
     if (response.statusCode == 200) {
 
       var jsonResponse = convert.jsonDecode(response.body);
 
-      var data = jsonResponse['data'];
-      print('Number of books about http: $data.');
+      coursesResponse = CoursesResponse.fromJson(jsonResponse);
+
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }
-    //parse response
 
+    return coursesResponse.data;
   }
 
 }
