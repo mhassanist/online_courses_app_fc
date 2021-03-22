@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:online_courses_app/data/course_model.dart';
 import 'package:online_courses_app/providers/courses_list_provider.dart';
 import 'package:online_courses_app/ui/widgets/course_card.dart';
+import 'package:online_courses_app/ui/widgets/error_widget.dart';
 import 'package:provider/provider.dart';
 
 class CoursesList extends StatelessWidget {
@@ -18,6 +20,9 @@ class CoursesList extends StatelessWidget {
     if(provider.state == ListScreenState.initial){
       provider.getCourses();
       return Center(child: CircularProgressIndicator(),);
+    }else if(provider.state == ListScreenState.error) {
+       String message = provider.errorMessage;
+       return OCErrorWidget(message);
     }else {
       coursesList = provider.coursesList;
     }
