@@ -19,7 +19,7 @@ class CoursesList extends StatelessWidget {
 
     if(provider.state == ListScreenState.initial){
       provider.getCourses();
-      return Center(child: CircularProgressIndicator(),);
+      return Container(color:Colors.white ,child: Center(child: CircularProgressIndicator(),));
     }else if(provider.state == ListScreenState.error) {
        String message = provider.errorMessage;
        return OCErrorWidget(message);

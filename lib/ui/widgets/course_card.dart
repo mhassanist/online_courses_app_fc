@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:online_courses_app/data/course_model.dart';
+import 'package:online_courses_app/ui/course_details.dart';
 
 class CourseCard extends StatelessWidget {
   final Course _course;
@@ -11,8 +12,13 @@ class CourseCard extends StatelessWidget {
     Widget courseCard = _buildCourseCard();
 
     return GestureDetector(
-        onTap: () {
-          //when we click on the card
+        onTap: () async{
+         final result =  await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CourseDetails(_course)),
+          );
+
+         print(result);
         },
         child: courseCard);
   }

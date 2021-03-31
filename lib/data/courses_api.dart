@@ -23,7 +23,7 @@ class CoursesAPI {
   Future<APIResult> getCourses() async {
     var url =
         'https://raw.githubusercontent.com/mhassanist/courses-list-api/main/db.json';
-
+    //comment that to throw format exception
     //url = 'https://raw.githubusercontent.com/mhassanist/courses-list-api/main/wrong.json';
 
     http.Response response;
