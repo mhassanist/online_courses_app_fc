@@ -13,10 +13,13 @@ class CourseCard extends StatelessWidget {
 
     return GestureDetector(
         onTap: () async{
-         final result =  await Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => CourseDetails(_course)),
-          );
+         // final result =  await Navigator.push(
+         //    context,
+         //    MaterialPageRoute(builder: (context) => CourseDetails(_course)),
+         //  );
+
+         final result = await Navigator.pushNamed(context, CourseDetails.routeName,
+              arguments:_course);
 
          print(result);
         },

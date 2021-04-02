@@ -7,6 +7,10 @@ import 'package:online_courses_app/ui/widgets/error_widget.dart';
 import 'package:provider/provider.dart';
 
 class CoursesList extends StatelessWidget {
+
+  static const String routeName = "/";
+
+
   List<Course> coursesList;
 
   CoursesListProvider provider;
