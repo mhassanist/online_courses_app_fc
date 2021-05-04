@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:online_courses_app/data/course_model.dart';
+import 'file:///D:/code/online_courses_app/lib/data/models/course_model.dart';
 import 'package:online_courses_app/providers/courses_list_provider.dart';
 import 'package:online_courses_app/ui/widgets/course_card.dart';
 import 'package:online_courses_app/ui/widgets/error_widget.dart';

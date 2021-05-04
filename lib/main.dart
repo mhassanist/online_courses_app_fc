@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:online_courses_app/data/course_model.dart';
-import 'package:online_courses_app/data/courses_api.dart';
+import 'file:///D:/code/online_courses_app/lib/data/models/course_model.dart';
+import 'file:///D:/code/online_courses_app/lib/data/api/courses_api.dart';
 import 'package:online_courses_app/providers/courses_list_provider.dart';
 import 'package:online_courses_app/ui/course_details.dart';
 import 'package:online_courses_app/ui/list_courses.dart';
+import 'package:online_courses_app/ui/login_screen.dart';
 import 'package:provider/provider.dart';
 
 void main(){
@@ -36,7 +37,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       initialRoute: CoursesList.routeName,
       routes: {
-        CoursesList.routeName: (context) => CoursesList(),
+        CoursesList.routeName: (context) => LoginScreen(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         CourseDetails.routeName : (context) => CourseDetails(),
       },

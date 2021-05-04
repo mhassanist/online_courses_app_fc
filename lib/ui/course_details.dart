@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:online_courses_app/data/course_model.dart';
+import 'file:///D:/code/online_courses_app/lib/data/models/course_model.dart';
 
 class CourseDetails extends StatelessWidget {
 
