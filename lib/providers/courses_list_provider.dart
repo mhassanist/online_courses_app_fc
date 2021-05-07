@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'file:///D:/code/online_courses_app/lib/data/models/course_model.dart';
-import 'file:///D:/code/online_courses_app/lib/data/api/courses_api.dart';
+import 'package:online_courses_app/data/api/courses_api.dart';
+import 'package:online_courses_app/data/models/course_model.dart';
 
 enum ListScreenState{initial, loading, loaded, error}
 class CoursesListProvider with ChangeNotifier{

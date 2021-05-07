@@ -2,8 +2,7 @@ import 'dart:convert' as convert;
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:online_courses_app/data/app_constants.dart';
-import 'file:///D:/code/online_courses_app/lib/data/models/course_model.dart';
-import 'file:///D:/code/online_courses_app/lib/data/models/courses_response.dart';
+import 'package:online_courses_app/data/models/courses_response.dart';
 import 'package:online_courses_app/data/models/meta_data.dart';
 
 class Failure {

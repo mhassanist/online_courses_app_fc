@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///D:/code/online_courses_app/lib/data/models/course_model.dart';
-import 'file:///D:/code/online_courses_app/lib/data/api/courses_api.dart';
+import 'package:online_courses_app/data/models/course_model.dart';
 import 'package:online_courses_app/providers/courses_list_provider.dart';
 import 'package:online_courses_app/ui/course_details.dart';
 import 'package:online_courses_app/ui/list_courses.dart';

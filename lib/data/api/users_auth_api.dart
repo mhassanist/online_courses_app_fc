@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:http/io_client.dart';
 import 'package:online_courses_app/data/app_constants.dart';
 import 'package:http/http.dart' as http;
-import 'file:///D:/code/online_courses_app/lib/data/models/user_response.dart';
 import 'package:online_courses_app/data/models/meta_data.dart';
+import 'package:online_courses_app/data/models/user_response.dart';
 
 class Failure {
   int code;

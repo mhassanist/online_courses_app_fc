@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///D:/code/online_courses_app/lib/data/models/course_model.dart';
-
+import 'package:online_courses_app/data/models/course_model.dart';
 class CourseDetails extends StatelessWidget {
 
    static const String routeName = "/course_details";
