@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       initialRoute: CoursesList.routeName,
       routes: {
-        CoursesList.routeName: (context) => LoginScreen(),
+        CoursesList.routeName: (context) => CoursesList(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         CourseDetails.routeName : (context) => CourseDetails(),
       },

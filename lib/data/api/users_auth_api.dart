@@ -1,28 +1,18 @@
 import 'dart:convert' as convert;
 import 'dart:io';
 import 'package:http/io_client.dart';
+import 'package:online_courses_app/data/api/api_constants.dart';
+import 'package:online_courses_app/data/api/api_response_handler.dart';
+import 'package:online_courses_app/data/api/api_result.dart';
+import 'package:online_courses_app/data/api/failure.dart';
 import 'package:online_courses_app/data/app_constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:online_courses_app/data/models/meta_data.dart';
 import 'package:online_courses_app/data/models/user_response.dart';
 
-class Failure {
-  int code;
-  String message;
-
-  Failure(this.code, this.message);
-}
-
-class APIResult {
-  bool hasError;
-  dynamic data;
-  Failure failure;
-}
-
 class UsersAuthAPI {
   Future<APIResult> login(String userName, String password) async {
-    var url =
-        'https://ocourses-api.bymsaudi.com/public/login';
+    var url = APIConstants.BASE_URL+'/login';
 
     http.Response response;
     var jsonResponse;
@@ -44,14 +34,14 @@ class UsersAuthAPI {
 
     try {
       HttpClient client = new HttpClient();
-      client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+      client.badCertificateCallback =
+          ((X509Certificate cert, String host, int port) => true);
 
       IOClient ioClient = IOClient(client);
 
       response = await ioClient.post(url,
           headers: {
-            HttpHeaders.contentTypeHeader :"application/json",
-
+            HttpHeaders.contentTypeHeader: "application/json",
           },
           body: convert.jsonEncode(bodyData));
 
@@ -70,19 +60,8 @@ class UsersAuthAPI {
         result.failure =
             Failure(responseMeta.code, responseMeta.messages.message);
       }
-    } on FormatException {
-      result.hasError = true;
-
-      result.failure = Failure(AppConstants.ERROR_NO_BODY_PARSING_CODE,
-          "Problem parsing data from the server");
-    } on SocketException {
-      result.hasError = true;
-      result.failure = Failure(
-          AppConstants.ERROR_NO_CONNECTION_CODE, "Can't connect to internet");
     } catch (ex) {
-      result.hasError = true;
-      result.failure =
-          Failure(AppConstants.ERROR_NO_CONNECTION_CODE, ex.toString());
+      result = APIResponseErrorHandler.parseError(ex);
     }
 
     print(result.data);
