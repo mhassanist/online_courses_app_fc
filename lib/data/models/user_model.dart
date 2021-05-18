@@ -11,6 +11,7 @@ class User{
     c.username = json['username'];
     c.fullName = json['full_name'];
     c.email = json['email'];
+    c.accessToken = json['access_token'];
     return c;
   }
 }

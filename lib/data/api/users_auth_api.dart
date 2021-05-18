@@ -9,6 +9,7 @@ import 'package:online_courses_app/data/app_constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:online_courses_app/data/models/meta_data.dart';
 import 'package:online_courses_app/data/models/user_response.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UsersAuthAPI {
   Future<APIResult> login(String userName, String password) async {
@@ -50,9 +51,14 @@ class UsersAuthAPI {
 
         userResponse = UserResponse.fromJson(jsonResponse);
 
+        SharedPreferences _prefs = await SharedPreferences.getInstance();
+        await _prefs.setString("token", userResponse.data.accessToken);
+
+
         result.hasError = false;
         result.data = userResponse.data;
       } else {
+        jsonResponse = convert.jsonDecode(response.body);
         userResponse = UserResponse.fromJson(jsonResponse);
         MetaData responseMeta = userResponse.metaData;
 

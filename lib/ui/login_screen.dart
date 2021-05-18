@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:online_courses_app/data/api/users_auth_api.dart';
+import 'package:online_courses_app/data/models/user_model.dart';
+import 'package:online_courses_app/providers/login_provider.dart';
+import 'package:online_courses_app/ui/list_courses.dart';
 import 'package:online_courses_app/ui/styles.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -12,19 +16,32 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _passwordController = TextEditingController();
   String errorString = "";
 
+  LoginProvider loginProvider;
+
   @override
   Widget build(BuildContext context) {
-    return _buildLoginScreen();
+    loginProvider = Provider.of<LoginProvider>(context);
+    if (loginProvider.state == LoginScreenState.initial)
+      return _buildLoginScreen();
+    else if (loginProvider.state == LoginScreenState.loading)
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    else if (loginProvider.state == LoginScreenState.error) {
+      errorString = loginProvider.errorMessage;
+      return _buildLoginScreen();
+    } else
+      return CoursesList();
   }
 
   Widget _buildLoginScreen() {
-    _emailController.text="admin@admin.com";
-    _passwordController.text="123456";
-    final logo          = _buildLogoImage();
-    final emailField    = _buildEmailField();
+    _emailController.text = "admin@admin.com";
+    _passwordController.text = "123456";
+    final logo = _buildLogoImage();
+    final emailField = _buildEmailField();
     final passwordField = _buildPasswordField();
-    final errorText     = _buildErrorTextField();
-    final loginButton   = _buildLoginButton();
+    final errorText = _buildErrorTextField();
+    final loginButton = _buildLoginButton();
 
     return Scaffold(
       body: Container(
@@ -65,58 +82,59 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
   Widget _buildLoginButton() {
     return Material(
-    elevation: 5.0,
-    borderRadius: BorderRadius.circular(5.0),
-    color: Theme.of(context).primaryColor,
-    child: MaterialButton(
-      minWidth: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-      onPressed: () {
-        String username = _emailController.text;
-        String password = _passwordController.text;
-
-        UsersAuthAPI().login(username,password);
-        print(username +" -- " + password);
-      },
-      child: Text("Login",
-          textAlign: TextAlign.center,
-          style: Styles.mainTextStyle
-              .copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
-    ),
-  );
+      elevation: 5.0,
+      borderRadius: BorderRadius.circular(5.0),
+      color: Theme.of(context).primaryColor,
+      child: MaterialButton(
+        minWidth: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        onPressed: () {
+          String username = _emailController.text;
+          String password = _passwordController.text;
+          loginProvider.login(username, password);
+          //UsersAuthAPI().login(username,password);
+          //print(username +" -- " + password);
+        },
+        child: Text("Login",
+            textAlign: TextAlign.center,
+            style: Styles.mainTextStyle
+                .copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
+      ),
+    );
   }
 
   Widget _buildErrorTextField() {
     return Text(
-    errorString,
-    style: Styles.mainTextStyleRed,
-    textAlign: TextAlign.center,
-  );
+      errorString,
+      style: Styles.mainTextStyleRed,
+      textAlign: TextAlign.center,
+    );
   }
 
   Widget _buildPasswordField() {
     return TextField(
-    obscureText: true,
-    style: Styles.mainTextStyle,
-    controller: _passwordController,
-    decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        hintText: "Password",
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
-  );
+      obscureText: true,
+      style: Styles.mainTextStyle,
+      controller: _passwordController,
+      decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          hintText: "Password",
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+    );
   }
 
   Widget _buildEmailField() {
     return TextField(
-    controller: _emailController,
-    obscureText: false,
-    style: Styles.mainTextStyle,
-    decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        hintText: "Email",
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
-  );
+      controller: _emailController,
+      obscureText: false,
+      style: Styles.mainTextStyle,
+      decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          hintText: "Email",
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+    );
   }
 }
