@@ -11,7 +11,7 @@ class UserResponse {
     UserResponse userResponse = UserResponse();
 
     userResponse.metaData = MetaData.fromJson(json['meta_data']);
-    userResponse.data.accessToken= json['meta_data']['access_token'];
+
     if (json['data'] != null) userResponse.data = User.fromJson(json['data']);
 
     return userResponse;

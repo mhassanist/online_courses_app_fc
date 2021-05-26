@@ -51,9 +51,10 @@ class UsersAuthAPI {
 
         userResponse = UserResponse.fromJson(jsonResponse);
 
-        SharedPreferences _prefs = await SharedPreferences.getInstance();
-        await _prefs.setString("token", userResponse.data.accessToken);
+        //print("Token: " + userResponse.metaData.accessToken);
 
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString(AppConstants.KEY_ACCESS_TOKEN, userResponse.metaData.accessToken);
 
         result.hasError = false;
         result.data = userResponse.data;
